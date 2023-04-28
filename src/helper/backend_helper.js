@@ -32,3 +32,10 @@ export const patchLab = (data) => {
 export const postLabAppoinment = (data) => {
   return api.create(url.GET_LABAPPOINMENT, data);
 };
+export const getLabAppoinment = () => {
+  return api.get(url.GET_LABAPPOINMENT);
+};
+
+export const postPayment = (data) => {
+  return api.create(url.GET_PAYMENT, data);
+};

@@ -6,7 +6,7 @@ import {
   getLabList,
   postLab,
 } from "../../helper/backend_helper";
-import { Card, Col,  Row } from "react-bootstrap";
+import { Button, Card, Col, Modal, Row } from "react-bootstrap";
 import { useFormik } from "formik";
 import Select from "react-select";
 import * as Yup from "yup";
@@ -16,6 +16,7 @@ const LabTest = () => {
   const [category, setCategory] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
   const [data, setData] = useState([]);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     getData();
@@ -48,7 +49,6 @@ const LabTest = () => {
       });
   };
 
-  console.log(category);
   const handleDelete = (id) => {
     deleteLab(id)
       .then((res) => {
@@ -79,6 +79,7 @@ const LabTest = () => {
           if (res.status === 201) {
             getData();
             validate.resetForm();
+            setShow(false);
           }
         })
         .catch((err) => {
@@ -89,8 +90,84 @@ const LabTest = () => {
 
   return (
     <>
-      <h2>Lab Test</h2>
-      <Card className="mb-2">
+      <Card>
+        <Card.Header className="d-flex align-items-center justify-content-between">
+          <h2>Lab Checkup List</h2>
+          <button
+            className="btn btn-secondary"
+            onClick={() => {
+              setShow(true);
+            }}
+          >
+            Add
+          </button>
+        </Card.Header>
+        <Card.Body>
+          <Row>
+            {data.map((item, key) => {
+              return (
+                <Col key={key} md={6} className="mb-3">
+                  <Card>
+                    <Card.Header className="bg-primary">
+                      <p className="mb-0 text-white">{item.title}</p>
+                    </Card.Header>
+                    <Card.Body>
+                      <p>Includes : Following {item.category.length} Tests</p>
+                      <div>
+                        {item.category?.map((item, key) => {
+                          return (
+                            <span
+                              key={key}
+                              className="px-2 border rounded py-1 shadow m-1"
+                            >
+                              {item}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    </Card.Body>
+                    <Card.Footer className="d-flex align-items-center justify-content-between">
+                      <p className="mb-0">
+                        MRP Price:
+                        <span className="line-through me-2"> {item.price}</span>
+                        {item.selling_price}
+                      </p>
+                      <div>
+                        <Link
+                          className="btn btn-info ms-2"
+                          to={`/lab/${item._id}`}
+                        >
+                          Book
+                        </Link>
+                        <button
+                          type="button"
+                          className="btn btn-danger ms-2"
+                          onClick={() => {
+                            handleDelete(item._id);
+                          }}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </Card.Footer>
+                  </Card>
+                </Col>
+              );
+            })}
+          </Row>
+        </Card.Body>
+      </Card>
+
+      <Modal
+        show={show}
+        onHide={() => {
+          setShow(false);
+        }}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Add Checkup</Modal.Title>
+        </Modal.Header>
+
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -98,7 +175,7 @@ const LabTest = () => {
             return false;
           }}
         >
-          <Card.Body>
+          <Modal.Body>
             <div>
               <label>Title</label>
               <input
@@ -155,71 +232,22 @@ const LabTest = () => {
 
               <span className="text-danger">{validate.errors.category}</span>
             </div>
-          </Card.Body>
-          <Card.Footer>
-            <button className="btn btn-secondary">Submit</button>
-          </Card.Footer>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setShow(false);
+              }}
+            >
+              Close
+            </Button>
+            <Button variant="primary" type="submit">
+              Save Changes
+            </Button>
+          </Modal.Footer>
         </form>
-      </Card>
-      <Card>
-        <Card.Header>
-          <h2>List</h2>
-        </Card.Header>
-        <Card.Body>
-          <Row>
-            {data.map((item, key) => {
-              return (
-                <Col key={key} md={6} className="mb-3">
-                  <Card>
-                    <Card.Header className="bg-primary">
-                      <p className="mb-0 text-white">{item.title}</p>
-                    </Card.Header>
-                    <Card.Body>
-                      <p>Includes : Following {item.category.length} Tests</p>
-                      <div>
-                        {item.category?.map((item, key) => {
-                          return (
-                            <span
-                              key={key}
-                              className="px-2 border rounded py-1 shadow m-1"
-                            >
-                              {item}
-                            </span>
-                          );
-                        })}
-                      </div>
-                    </Card.Body>
-                    <Card.Footer className="d-flex align-items-center justify-content-between">
-                      <p className="mb-0">
-                        MRP Price:
-                        <span className="line-through me-2"> {item.price}</span>
-                        {item.selling_price}
-                      </p>  
-                      <div>
-                        <Link
-                          className="btn btn-info ms-2"
-                          to={`/lab/${item._id}`}
-                        >
-                          Book
-                        </Link>
-                        <button
-                          type="button"
-                          className="btn btn-danger ms-2"
-                          onClick={() => {
-                            handleDelete(item._id);
-                          }}
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </Card.Footer>
-                  </Card>
-                </Col>
-              );
-            })}
-          </Row>
-        </Card.Body>
-      </Card>
+      </Modal>
     </>
   );
 };

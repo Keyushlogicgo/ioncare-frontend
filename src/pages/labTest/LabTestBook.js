@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getLabList, postLabAppoinment } from "../../helper/backend_helper";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import moment from "moment/moment";
 
 const LabTestBook = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [data, setData] = useState({});
   const [time, setTime] = useState({
@@ -12,13 +13,10 @@ const LabTestBook = () => {
     end_time: "",
     date: "",
     test_id: "",
-    payment_id: "644a6115dba27abe35b993fc",
   });
   useEffect(() => {
     getData();
   }, []);
-
-  console.log(time);
 
   const getData = () => {
     getLabList(id)
@@ -38,6 +36,7 @@ const LabTestBook = () => {
       .then((res) => {
         if (res.status === 201) {
           console.log("res", res);
+          navigate("/lab");
         }
       })
       .catch((err) => {
