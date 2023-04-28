@@ -44,9 +44,11 @@ const Category = () => {
     enableReinitialize: true,
     initialValues: {
       title: "",
+      price: "",
     },
     validationSchema: Yup.object({
       title: Yup.string().required(),
+      price: Yup.number().required(),
     }),
     onSubmit: (value) => {
       postCategory(value)
@@ -65,9 +67,11 @@ const Category = () => {
     enableReinitialize: true,
     initialValues: {
       title: "",
+      price: "",
     },
     validationSchema: Yup.object({
       title: Yup.string().required(),
+      price: Yup.number().required(),
     }),
     onSubmit: (value) => {
       patchCategory({ data: value, id: updateId })
@@ -96,16 +100,30 @@ const Category = () => {
           }}
         >
           <Card.Body>
-            <label>Title</label>
-            <input
-              type="text"
-              name="title"
-              className="form-control"
-              value={validate.values.title}
-              onChange={validate.handleChange}
-              onBlur={validate.handleBlur}
-            />
-            <span className="text-danger">{validate.errors.title}</span>
+            <div>
+              <label>Title</label>
+              <input
+                type="text"
+                name="title"
+                className="form-control"
+                value={validate.values.title}
+                onChange={validate.handleChange}
+                onBlur={validate.handleBlur}
+              />
+              <span className="text-danger">{validate.errors.title}</span>
+            </div>
+            <div>
+              <label>Price</label>
+              <input
+                type="number"
+                name="price"
+                className="form-control"
+                value={validate.values.price}
+                onChange={validate.handleChange}
+                onBlur={validate.handleBlur}
+              />
+              <span className="text-danger">{validate.errors.price}</span>
+            </div>
           </Card.Body>
           <Card.Footer>
             <button className="btn btn-secondary">Submit</button>
@@ -124,7 +142,8 @@ const Category = () => {
                   key={key}
                   className="d-flex align-items-center justify-content-between border-bottom py-2"
                 >
-                  <p className="mb-0">{item.title}</p>
+                  <p className="mb-0">title: {item.title}</p>
+                  <p className="mb-0">Price: {item.price}</p>
                   <div>
                     <button
                       type="button"
@@ -170,17 +189,30 @@ const Category = () => {
           }}
         >
           <Modal.Body>
-            {" "}
-            <label>Title</label>
-            <input
-              type="text"
-              name="title"
-              className="form-control"
-              value={validateEdit.values.title}
-              onChange={validateEdit.handleChange}
-              onBlur={validateEdit.handleBlur}
-            />
-            <span className="text-danger">{validateEdit.errors.title}</span>
+            <div>
+              <label>Title</label>
+              <input
+                type="text"
+                name="title"
+                className="form-control"
+                value={validateEdit.values.title}
+                onChange={validateEdit.handleChange}
+                onBlur={validateEdit.handleBlur}
+              />
+              <span className="text-danger">{validateEdit.errors.title}</span>
+            </div>
+            <div>
+              <label>Price</label>
+              <input
+                type="number"
+                name="price"
+                className="form-control"
+                value={validateEdit.values.price}
+                onChange={validateEdit.handleChange}
+                onBlur={validateEdit.handleBlur}
+              />
+              <span className="text-danger">{validateEdit.errors.price}</span>
+            </div>
           </Modal.Body>
           <Modal.Footer>
             <Button

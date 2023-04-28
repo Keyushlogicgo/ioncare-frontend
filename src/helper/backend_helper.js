@@ -17,16 +17,16 @@ export const patchCategory = (data) => {
 };
 
 export const getLabList = (data) => {
-  return api.get(url.GET_LAB + (data ? "/" + data : ""));
+  return api.get(url.GET_PACKAGE + (data ? "/" + data : ""));
 };
 export const postLab = (data) => {
-  return api.create(url.GET_LAB, data);
+  return api.create(url.GET_PACKAGE, data);
 };
 export const deleteLab = (data) => {
-  return api.delete(url.GET_LAB + "/" + data);
+  return api.delete(url.GET_PACKAGE + "/" + data);
 };
 export const patchLab = (data) => {
-  return api.patch(url.GET_LAB + "/" + data.id, data.data);
+  return api.patch(url.GET_PACKAGE + "/" + data.id, data.data);
 };
 
 export const postLabAppoinment = (data) => {

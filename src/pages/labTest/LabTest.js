@@ -65,12 +65,10 @@ const LabTest = () => {
     enableReinitialize: true,
     initialValues: {
       title: "",
-      price: "",
       discount: "",
     },
     validationSchema: Yup.object({
       title: Yup.string().required(),
-      price: Yup.number().required(),
       discount: Yup.number().max(100).required(),
     }),
     onSubmit: (value) => {
@@ -187,18 +185,6 @@ const LabTest = () => {
                 onBlur={validate.handleBlur}
               />
               <span className="text-danger">{validate.errors.title}</span>
-            </div>
-            <div>
-              <label>Price</label>
-              <input
-                type="number"
-                name="price"
-                className="form-control"
-                value={validate.values.price}
-                onChange={validate.handleChange}
-                onBlur={validate.handleBlur}
-              />
-              <span className="text-danger">{validate.errors.price}</span>
             </div>
             <div>
               <label>Discount</label>
