@@ -1,0 +1,59 @@
+a {
+  text-decoration: none;
+  color: inherit;
+}
+a:hover {
+  color: inherit;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.index-9{
+  z-index: 9;
+}
+.hw-42 {
+  height: 42px;
+  width: 42px;
+}
+.hw-30 {
+  height: 30px;
+  width: 30px;
+}
+.h-200 {
+  height: 200px;
+}
+.h-500 {
+  height: 500px;
+}
+.object-contain {
+  object-fit: contain;
+}
+.bg-blur {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.fs-14 {
+  font-size: 14px;
+}
+.rounded-5 {
+  border-radius: 5px;
+}
+.rounded-8 {
+  border-radius: 8px;
+}
+.rounded-10 {
+  border-radius: 10px;
+}
+.rounded-15 {
+  border-radius: 15px;
+}
+.rounded-20 {
+  border-radius: 20px;
+}
+.cropBox {
+  height: 500px;
+}
+.line-through{
+  -webkit-text-decoration-line: line-through;
+  text-decoration-line: line-through;
+}
