@@ -72,7 +72,7 @@ const LabTest = () => {
       discount: Yup.number().max(100).required(),
     }),
     onSubmit: (value) => {
-      postLab({ ...value, category: categoryList })
+      postLab({ ...value, test: categoryList })
         .then((res) => {
           if (res.status === 201) {
             getData();
@@ -110,9 +110,9 @@ const LabTest = () => {
                       <p className="mb-0 text-white">{item.title}</p>
                     </Card.Header>
                     <Card.Body>
-                      <p>Includes : Following {item.category.length} Tests</p>
+                      <p>Includes : Following {item.test.length} Tests</p>
                       <div>
-                        {item.category?.map((item, key) => {
+                        {item.test?.map((item, key) => {
                           return (
                             <span
                               key={key}

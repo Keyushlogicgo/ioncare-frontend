@@ -1,8 +1,8 @@
 const API = "/api";
 const V2 = "/v2";
 const PACKAGE = "/package";
-const LABAPPOINMENT = "/labappoinment";
-const CATEGORY = "/category";
+const LABAPPOINMENT = "/appoinment";
+const CATEGORY = "/test";
 const PAYMENT = "/payment";
 
 export const GET_CATEGORY = API + V2 + CATEGORY + "/";
