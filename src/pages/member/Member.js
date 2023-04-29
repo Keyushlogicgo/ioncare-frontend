@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import {
-  deleteCategory,
-  getCategoryList,
+  deleteMember,
+  getMemberList,
   patchCategory,
   postCategory,
 } from "../../helper/backend_helper";
@@ -10,7 +10,7 @@ import { Button, Card, Modal } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-const Member = () => {
+const Category = () => {
   const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
   const [editData, setEditData] = useState({});
@@ -20,9 +20,8 @@ const Member = () => {
   }, []);
 
   const getData = () => {
-    getCategoryList()
+    getMemberList()
       .then((res) => {
-        console.log("res ==>", res);
         setData(res?.data?.data);
       })
       .catch((err) => {
@@ -30,7 +29,7 @@ const Member = () => {
       });
   };
   const handleDelete = (id) => {
-    deleteCategory(id)
+    deleteMember(id)
       .then((res) => {
         if (res.status === 200) {
           getData();
@@ -44,12 +43,34 @@ const Member = () => {
   const validate = useFormik({
     enableReinitialize: true,
     initialValues: {
-      title: "",
-      price: "",
+      email: "",
+      first_name: "",
+      last_name: "",
+      dob: "",
+      age: "",
+      phone: "",
+      gender: "",
+      relations: "",
+      address: "",
+      area: "",
+      city: "",
+      state: "",
+      country: "",
     },
     validationSchema: Yup.object({
-      title: Yup.string().required(),
-      price: Yup.number().required(),
+      email: Yup.string().required().email(),
+      first_name: Yup.string().required(),
+      last_name: Yup.string().required(),
+      dob: Yup.string().required(),
+      age: Yup.number().required(),
+      phone: Yup.number().required(),
+      gender: Yup.string().required(),
+      relations: Yup.string().required(),
+      address: Yup.string().required(),
+      area: Yup.string().required(),
+      city: Yup.string().required(),
+      state: Yup.string().required(),
+      country: Yup.string().required(),
     }),
     onSubmit: (value) => {
       postCategory(value)
@@ -67,12 +88,34 @@ const Member = () => {
   const validateEdit = useFormik({
     enableReinitialize: true,
     initialValues: {
-      title: editData.title || "",
-      price: editData.price || "",
+      email: "",
+      first_name: "",
+      last_name: "",
+      dob: "",
+      age: "",
+      phone: "",
+      gender: "",
+      relations: "",
+      address: "",
+      area: "",
+      city: "",
+      state: "",
+      country: "",
     },
     validationSchema: Yup.object({
-      title: Yup.string().required(),
-      price: Yup.number().required(),
+      email: Yup.string().required().email(),
+      first_name: Yup.string().required(),
+      last_name: Yup.string().required(),
+      dob: Yup.string().required(),
+      age: Yup.number().required(),
+      phone: Yup.number().required(),
+      gender: Yup.string().required(),
+      relations: Yup.string().required(),
+      address: Yup.string().required(),
+      area: Yup.string().required(),
+      city: Yup.string().required(),
+      state: Yup.string().required(),
+      country: Yup.string().required(),
     }),
     onSubmit: (value) => {
       patchCategory({ data: value, id: updateId })
@@ -91,7 +134,7 @@ const Member = () => {
 
   return (
     <>
-      <h2>Category</h2>
+      <h2>Member</h2>
       <Card className="mb-2">
         <form
           onSubmit={(e) => {
@@ -102,28 +145,40 @@ const Member = () => {
         >
           <Card.Body>
             <div>
-              <label>Title</label>
+              <label>email</label>
               <input
-                type="text"
-                name="title"
+                type="email"
+                name="email"
                 className="form-control"
-                value={validate.values.title}
+                value={validate.values.email}
                 onChange={validate.handleChange}
                 onBlur={validate.handleBlur}
               />
-              <span className="text-danger">{validate.errors.title}</span>
+              <span className="text-danger">{validate.errors.email}</span>
             </div>
             <div>
-              <label>Price</label>
+              <label>First Name</label>
               <input
-                type="number"
-                name="price"
+                type="text"
+                name="first_name"
                 className="form-control"
-                value={validate.values.price}
+                value={validate.values.first_name}
                 onChange={validate.handleChange}
                 onBlur={validate.handleBlur}
               />
-              <span className="text-danger">{validate.errors.price}</span>
+              <span className="text-danger">{validate.errors.first_name}</span>
+            </div>
+            <div>
+              <label>Last Name</label>
+              <input
+                type="text"
+                name="last_name"
+                className="form-control"
+                value={validate.values.last_name}
+                onChange={validate.handleChange}
+                onBlur={validate.handleBlur}
+              />
+              <span className="text-danger">{validate.errors.last_name}</span>
             </div>
           </Card.Body>
           <Card.Footer>
@@ -143,8 +198,10 @@ const Member = () => {
                   key={key}
                   className="d-flex align-items-center justify-content-between border-bottom py-2"
                 >
-                  <p className="mb-0">title: {item.title}</p>
-                  <p className="mb-0">Price: {item.price}</p>
+                  <p className="mb-0">
+                    Name: {`${item.first_name} ${item.last_name}`}
+                  </p>
+                  <p className="mb-0">Email: {item.email}</p>
                   <div>
                     <button
                       type="button"
@@ -238,4 +295,4 @@ const Member = () => {
   );
 };
 
-export default Member;
+export default Category;

@@ -8,6 +8,7 @@ const Header = () => {
     { url: "/category", title: "Category" },
     { url: "/lab", title: "Lab Test" },
     { url: "/lab/appoinment", title: "Appoinment" },
+    { url: "/member", title: "Member" },
   ];
 
   return (

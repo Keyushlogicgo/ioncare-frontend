@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getLabList, postLabAppoinment } from "../../helper/backend_helper";
+import {
+  getLabList,
+  getMemberList,
+  postLabAppoinment,
+} from "../../helper/backend_helper";
 import { useNavigate, useParams } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import moment from "moment/moment";
@@ -8,11 +12,13 @@ const LabTestBook = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [data, setData] = useState({});
+  const [member, setMember] = useState([]);
   const [time, setTime] = useState({
     start_time: "",
     end_time: "",
     date: "",
     test_id: "",
+    member_id: "",
   });
   useEffect(() => {
     getData();
@@ -25,6 +31,15 @@ const LabTestBook = () => {
           setData(res?.data?.data[0]);
           console.log(data);
           setTime({ ...time, test_id: res?.data?.data[0]._id });
+        }
+      })
+      .catch((err) => {
+        console.log("err ==>", err);
+      });
+    getMemberList()
+      .then((res) => {
+        if (res.status === 200) {
+          setMember(res.data.data);
         }
       })
       .catch((err) => {
@@ -84,6 +99,22 @@ const LabTestBook = () => {
               });
             }}
           />
+          <select
+            className="form-control"
+            onChange={(e) => {
+              setTime({
+                ...time,
+                member_id: e.target.value,
+              });
+            }}
+          >
+            <option selected disabled>
+              Select Member
+            </option>
+            {member?.map((item, key) => {
+              return <option value={item._id}>{item.first_name}</option>;
+            })}
+          </select>
           {timeArray?.map((item, key) => {
             return (
               <div key={key}>

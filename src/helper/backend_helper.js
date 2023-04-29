@@ -29,6 +29,19 @@ export const patchLab = (data) => {
   return api.patch(url.GET_PACKAGE + "/" + data.id, data.data);
 };
 
+export const getMemberList = (data) => {
+  return api.get(url.GET_MEMBER + (data ? "/" + data : ""));
+};
+export const postMember = (data) => {
+  return api.create(url.GET_MEMBER, data);
+};
+export const deleteMember = (data) => {
+  return api.delete(url.GET_MEMBER + "/" + data);
+};
+export const patchMember = (data) => {
+  return api.patch(url.GET_MEMBER + "/" + data.id, data.data);
+};
+
 export const postLabAppoinment = (data) => {
   return api.create(url.GET_LABAPPOINMENT, data);
 };
