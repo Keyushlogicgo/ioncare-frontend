@@ -5,6 +5,7 @@ import LabTest from "../pages/labTest/LabTest";
 import LabTestAppoinment from "../pages/labTest/LabTestAppoinment";
 import LabTestBook from "../pages/labTest/LabTestBook";
 import Prescription from "../pages/prescription/Prescription";
+import PackageDetails from "../pages/labTest/PackageDetails";
 
 export const publicRoute = [
   {
@@ -20,12 +21,16 @@ export const publicRoute = [
     element: <LabTest />,
   },
   {
-    path: "/lab/:id",
+    path: "/lab/book/:id",
     element: <LabTestBook />,
   },
   {
     path: "/lab/appoinment",
     element: <LabTestAppoinment />,
+  },
+  {
+    path: "/lab/:id",
+    element: <PackageDetails />,
   },
   {
     path: "/member",

@@ -154,8 +154,14 @@ const LabTest = () => {
                       </p>
                       <div>
                         <Link
-                          className="btn btn-info ms-2"
+                          className="btn btn-secondary ms-2"
                           to={`/lab/${item._id}`}
+                        >
+                          View
+                        </Link>
+                        <Link
+                          className="btn btn-info ms-2"
+                          to={`/lab/book/${item._id}`}
                         >
                           Book
                         </Link>
