@@ -233,10 +233,10 @@ const Prescription = () => {
                 </Col>
               );
             })}
-            <Col xs={12} className="d-flex align-items-center"></Col>
+            
           </Row>
         </Card.Body>
-        <Card.Footer>
+        <Card.Footer className="d-flex align-items-center">
           <input
             type="number"
             className="form-control w-100"

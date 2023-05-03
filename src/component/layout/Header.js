@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const arrObj = [
     { url: "/", title: "LOGO" },
-    { url: "/category", title: "Category" },
+    { url: "/Test", title: "Test" },
     { url: "/lab", title: "Lab Test" },
     { url: "/lab/appoinment", title: "Appoinment" },
     { url: "/member", title: "Member" },

@@ -68,9 +68,9 @@ const LabTestBook = () => {
           <p className="mb-0 text-white">{data?.title}</p>
         </Card.Header>
         <Card.Body>
-          <p>Includes : Following {data?.category?.length} Tests</p>
+          <p>Includes : Following {data?.Test?.length} Tests</p>
           <div>
-            {data?.category?.map((item, key) => {
+            {data?.Test?.map((item, key) => {
               return (
                 <span key={key} className="px-2 border rounded py-1 shadow m-1">
                   {item}

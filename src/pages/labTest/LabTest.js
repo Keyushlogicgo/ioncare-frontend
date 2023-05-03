@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import {
   deleteLab,
-  getCategoryList,
+  getTestList,
   getLabList,
   postLab,
 } from "../../helper/backend_helper";
@@ -13,10 +13,14 @@ import * as Yup from "yup";
 import { Link } from "react-router-dom";
 
 const LabTest = () => {
-  const [category, setCategory] = useState([]);
-  const [categoryList, setCategoryList] = useState([]);
+  const [Test, setTest] = useState([]);
+  const [TestList, setTestList] = useState([]);
   const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
+  const [imageData, setImageData] = useState({
+    base: "https://e7.pngegg.com/pngimages/187/201/png-clipart-upload-file-transfer-protocol-form-jquery-upload-button-miscellaneous-blue.png",
+    encoded: "",
+  });
 
   useEffect(() => {
     getData();
@@ -33,7 +37,7 @@ const LabTest = () => {
         console.log("err ==>", err);
       });
 
-    getCategoryList()
+    getTestList()
       .then((res) => {
         if (res.status === 200) {
           var arrObj = [];
@@ -41,12 +45,29 @@ const LabTest = () => {
             const { _id, title } = res?.data?.data[i];
             arrObj.push({ value: _id, label: title });
           }
-          setCategory(arrObj);
+          setTest(arrObj);
         }
       })
       .catch((err) => {
         console.log("err ==>", err);
       });
+  };
+
+  const handleFilePreview = (input) => {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        const baseUrl = e.target.result
+          .replace("data:", "")
+          .replace(/^.+,/, "")
+          .trim();
+        setImageData({
+          base: e.target.result,
+          encoded: baseUrl,
+        });
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
   };
 
   const handleDelete = (id) => {
@@ -72,7 +93,7 @@ const LabTest = () => {
       discount: Yup.number().max(100).required(),
     }),
     onSubmit: (value) => {
-      postLab({ ...value, test: categoryList })
+      postLab({ ...value, test: TestList, image: imageData.encoded })
         .then((res) => {
           if (res.status === 201) {
             getData();
@@ -110,6 +131,7 @@ const LabTest = () => {
                       <p className="mb-0 text-white">{item.title}</p>
                     </Card.Header>
                     <Card.Body>
+                      {item.image ? <img src={item.image} className="hw-42" /> : null}
                       <p>Includes : Following {item.test.length} Tests</p>
                       <div>
                         {item.test?.map((item, key) => {
@@ -175,6 +197,23 @@ const LabTest = () => {
         >
           <Modal.Body>
             <div>
+              <input
+                type="file"
+                onChange={(e) => {
+                  handleFilePreview(e.target);
+                }}
+                id="fileInput"
+                hidden
+              />
+              <label htmlFor="fileInput" className="w-100">
+                <img
+                  src={imageData?.base}
+                  alt="..."
+                  className="h-200 w-100 object-contain border  border-3 p-1 cursor-pointer"
+                />
+              </label>
+            </div>
+            <div>
               <label>Title</label>
               <input
                 type="text"
@@ -199,11 +238,11 @@ const LabTest = () => {
               <span className="text-danger">{validate.errors.discount}</span>
             </div>
             <div>
-              <label>Category</label>
+              <label>Test</label>
               <Select
-                options={category}
+                options={Test}
                 isMulti
-                name="category"
+                name="Test"
                 className="basic-multi-select"
                 classNamePrefix="select"
                 onChange={(val) => {
@@ -212,11 +251,11 @@ const LabTest = () => {
                   for (let j = 0; j < val.length; j++) {
                     arrCatObj.push(val[j].value);
                   }
-                  setCategoryList(arrCatObj);
+                  setTestList(arrCatObj);
                 }}
               />
 
-              <span className="text-danger">{validate.errors.category}</span>
+              <span className="text-danger">{validate.errors.Test}</span>
             </div>
           </Modal.Body>
           <Modal.Footer>

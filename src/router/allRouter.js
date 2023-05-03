@@ -1,5 +1,5 @@
 import Member from "../pages/member/Member";
-import Category from "../pages/category/Category";
+import Test from "../pages/test/Test";
 import Dashboard from "../pages/dashboard/Dashboard";
 import LabTest from "../pages/labTest/LabTest";
 import LabTestAppoinment from "../pages/labTest/LabTestAppoinment";
@@ -12,8 +12,8 @@ export const publicRoute = [
     element: <Dashboard />,
   },
   {
-    path: "/category",
-    element: <Category />,
+    path: "/Test",
+    element: <Test />,
   },
   {
     path: "/lab",

@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import {
-  deleteCategory,
-  getCategoryList,
-  patchCategory,
-  postCategory,
+  deleteTest,
+  getTestList,
+  patchTest,
+  postTest,
 } from "../../helper/backend_helper";
 import { Button, Card, Modal } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-const Member = () => {
+const Test = () => {
   const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
   const [editData, setEditData] = useState({});
@@ -20,7 +20,7 @@ const Member = () => {
   }, []);
 
   const getData = () => {
-    getCategoryList()
+    getTestList()
       .then((res) => {
         console.log("res ==>", res);
         setData(res?.data?.data);
@@ -30,7 +30,7 @@ const Member = () => {
       });
   };
   const handleDelete = (id) => {
-    deleteCategory(id)
+    deleteTest(id)
       .then((res) => {
         if (res.status === 200) {
           getData();
@@ -52,7 +52,7 @@ const Member = () => {
       price: Yup.number().required(),
     }),
     onSubmit: (value) => {
-      postCategory(value)
+      postTest(value)
         .then((res) => {
           if (res.status === 201) {
             getData();
@@ -75,7 +75,7 @@ const Member = () => {
       price: Yup.number().required(),
     }),
     onSubmit: (value) => {
-      patchCategory({ data: value, id: updateId })
+      patchTest({ data: value, id: updateId })
         .then((res) => {
           if (res.status === 200) {
             getData();
@@ -91,7 +91,7 @@ const Member = () => {
 
   return (
     <>
-      <h2>Category</h2>
+      <h2>Test</h2>
       <Card className="mb-2">
         <form
           onSubmit={(e) => {
@@ -238,4 +238,4 @@ const Member = () => {
   );
 };
 
-export default Member;
+export default Test;

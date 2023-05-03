@@ -3,17 +3,17 @@ import * as url from "./url_helper";
 
 const api = new ApiClient();
 
-export const getCategoryList = () => {
-  return api.get(url.GET_CATEGORY);
+export const getTestList = () => {
+  return api.get(url.GET_Test);
 };
-export const postCategory = (data) => {
-  return api.create(url.GET_CATEGORY, data);
+export const postTest = (data) => {
+  return api.create(url.GET_Test, data);
 };
-export const deleteCategory = (data) => {
-  return api.delete(url.GET_CATEGORY + "/" + data);
+export const deleteTest = (data) => {
+  return api.delete(url.GET_Test + "/" + data);
 };
-export const patchCategory = (data) => {
-  return api.patch(url.GET_CATEGORY + "/" + data.id, data.data);
+export const patchTest = (data) => {
+  return api.patch(url.GET_Test + "/" + data.id, data.data);
 };
 
 export const getLabList = (data) => {
@@ -43,10 +43,10 @@ export const patchMember = (data) => {
 };
 
 export const postLabAppoinment = (data) => {
-  return api.create(url.GET_LABAPPOINMENT, data);
+  return api.create(url.GET_PACKAGE_APPOINTMENT, data);
 };
 export const getLabAppoinment = () => {
-  return api.get(url.GET_LABAPPOINMENT);
+  return api.get(url.GET_PACKAGE_APPOINTMENT);
 };
 
 export const postPayment = (data) => {
