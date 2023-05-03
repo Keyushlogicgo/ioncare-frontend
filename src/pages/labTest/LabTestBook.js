@@ -17,7 +17,7 @@ const LabTestBook = () => {
     start_time: "",
     end_time: "",
     date: "",
-    test_id: "",
+    package_id: "",
     member_id: "",
   });
   useEffect(() => {
@@ -30,7 +30,7 @@ const LabTestBook = () => {
         if (res.status === 200) {
           setData(res?.data?.data[0]);
           console.log(data);
-          setTime({ ...time, test_id: res?.data?.data[0]._id });
+          setTime({ ...time, package_id: res?.data?.data[0]._id });
         }
       })
       .catch((err) => {

@@ -22,6 +22,10 @@ a:hover {
 .h-200 {
   height: 200px;
 }
+.hw-200 {
+  height: 200px;
+  width: 200px;
+}
 .h-500 {
   height: 500px;
 }
@@ -56,4 +60,10 @@ a:hover {
 .line-through{
   -webkit-text-decoration-line: line-through;
   text-decoration-line: line-through;
+}
+.carousel{
+  display: none;
+}
+.carousel.carousel-slider{
+  display: block;
 }

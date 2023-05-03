@@ -9,6 +9,7 @@ const Header = () => {
     { url: "/lab", title: "Lab Test" },
     { url: "/lab/appoinment", title: "Appoinment" },
     { url: "/member", title: "Member" },
+    { url: "/prescription", title: "Prescription" },
   ];
 
   return (

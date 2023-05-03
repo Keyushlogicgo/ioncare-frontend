@@ -52,3 +52,23 @@ export const getLabAppoinment = () => {
 export const postPayment = (data) => {
   return api.create(url.GET_PAYMENT, data);
 };
+
+export const postPrescriptionImage = (data) => {
+  return api.create(url.GET_PRESCRIPTION_IMAGE, data);
+};
+export const getPrescriptionImage = (data) => {
+  return api.get(url.GET_PRESCRIPTION_IMAGE + (data ? "/" + data : ""));
+};
+export const deletePrescriptionImage = (data) => {
+  return api.delete(url.GET_PRESCRIPTION_IMAGE + "/" + data);
+};
+
+export const postPrescription = (data) => {
+  return api.create(url.GET_PRESCRIPTION, data);
+};
+export const getPrescription = (data) => {
+  return api.get(url.GET_PRESCRIPTION + (data ? "/" + data : ""));
+};
+export const deletePrescription = (data) => {
+  return api.delete(url.GET_PRESCRIPTION + "/" + data);
+};

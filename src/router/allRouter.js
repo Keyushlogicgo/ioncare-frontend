@@ -4,6 +4,7 @@ import Dashboard from "../pages/dashboard/Dashboard";
 import LabTest from "../pages/labTest/LabTest";
 import LabTestAppoinment from "../pages/labTest/LabTestAppoinment";
 import LabTestBook from "../pages/labTest/LabTestBook";
+import Prescription from "../pages/prescription/Prescription";
 
 export const publicRoute = [
   {
@@ -29,5 +30,9 @@ export const publicRoute = [
   {
     path: "/member",
     element: <Member />,
+  },
+  {
+    path: "/prescription",
+    element: <Prescription />,
   },
 ];

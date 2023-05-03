@@ -180,6 +180,18 @@ const Category = () => {
               />
               <span className="text-danger">{validate.errors.last_name}</span>
             </div>
+            <div>
+              <label>Date of Birth</label>
+              <input
+                type="date"
+                name="dob"
+                className="form-control"
+                value={validate.values.dob}
+                onChange={validate.handleChange}
+                onBlur={validate.handleBlur}
+              />
+              <span className="text-danger">{validate.errors.dob}</span>
+            </div>
           </Card.Body>
           <Card.Footer>
             <button className="btn btn-secondary">Submit</button>
